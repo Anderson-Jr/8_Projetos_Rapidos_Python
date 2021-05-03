@@ -19,7 +19,7 @@ class ChuteONumero:
                 self.PedirValorAleatorio()
             else:
                 self.tentar_novamente = False
-        if self.valor_do_chute == self.valor_do_chute:
+        if int(self.valor_do_chute) == self.valor_do_chute:
             print('PARABÉNS, VOCÊ ACERTOU!!')
                 
     def PedirValorAleatorio(self):
