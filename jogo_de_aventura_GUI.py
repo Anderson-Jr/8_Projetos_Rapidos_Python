@@ -19,36 +19,35 @@ class JogoDeAventura:
     def Iniciar(self):
         #Layout
         layout = [
-            [sg.Text(self.pergunta1,key='resposta_ao_usuario')],
+            [sg.Output(size=(30, 8),key='respostas')],
             [sg.Input(size=(12,0),key='resposta_do_user')],
-            [sg.Output(size=(30, 8),key='mostrar_resposta')],
-            [sg.Button('Definir')]
+            [sg.Button('Iniciar'), sg.Button('Responder')]
             ]       
         #Janela
         self.janela = sg.Window('Defina seu destino!', layout=layout)
         #Ler valores
-        self.lerValores()
+        self.lerValores() #Nesse ponto o self.lerValores foi utilizado somente para o programa entender o evento 'Responder', e iniciar o IF
         #Usar valores
-        if self.evento == 'Definir':
-            if self.values['resposta_do_user'][0].lower() == 'n':
-                print(self.pergunta2)
-                self.lerValores()
-                if self.values['resposta_do_user'].lower() == 'espada':
-                    print(self.final1)
-                elif self.values['resposta_do_user'].lower() == 'escudo':
-                    print(self.final2)
-            elif self.values['resposta_do_user'][0].lower() == 's':
-                print(self.pergunta3) 
-                self.lerValores()
-                if self.values['resposta_do_user'][0].lower() == 'frente':
-                    print(self.final3)
-                elif self.values['resposta_do_user'][0].lower() == 'tatico':
-                    print(self.final4)
-            else:
-                print('Insira um valor válido!')
-
-            sleep(1)
-                
+        while True:
+            if self.evento == 'Iniciar':
+                print(self.pergunta1)
+                self.lerValores() #Aqui ele é usado para ler os valores realmente inseridos após
+                if self.values['resposta_do_user'][0].lower() == 'n':
+                    print(self.pergunta2)
+                    self.lerValores()
+                    if self.values['resposta_do_user'].lower() == 'espada':
+                        print(self.final1)
+                    elif self.values['resposta_do_user'].lower() == 'escudo':
+                        print(self.final2)
+                elif self.values['resposta_do_user'][0].lower() == 's':
+                    print(self.pergunta3) 
+                    self.lerValores()
+                    if self.values['resposta_do_user'].lower() == 'frente':
+                        print(self.final3)
+                    elif self.values['resposta_do_user'].lower() == 'tatico':
+                        print(self.final4)
+                else:
+                    print('Insira um valor válido!')
     
     def lerValores(self):
         self.evento, self.values = self.janela.Read()
